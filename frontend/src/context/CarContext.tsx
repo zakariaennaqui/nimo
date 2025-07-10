@@ -2,6 +2,9 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+// Configure axios defaults
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 export interface CarSpecs {
   passengers?: number;
   luggage?: number;

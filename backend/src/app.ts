@@ -12,8 +12,18 @@ dotenv.config();
 // Initialize express app
 const app = express();
 
-// Middleware
-app.use(cors());
+// Middleware - Configure CORS properly
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000', 
+    'https://nimo-mu.vercel.app',
+    'https://*.vercel.app'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -56,8 +56,8 @@ interface AuthProviderProps {
 // Create the context
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Set up axios default baseURL and interceptors
-axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+// Set up axios default baseURL and interceptors  
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 axios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
