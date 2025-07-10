@@ -108,13 +108,24 @@ npm run dev              # Lancer le frontend sur http://localhost:5173
 ### Backend:
 ```
 PORT=5000
-MONGODB_URI=...
-JWT_SECRET=...
-CLOUDINARY_CLOUD_NAME=...
-CLOUDINARY_API_KEY=...
-CLOUDINARY_API_SECRET=...
-EMAIL_USER=...
-EMAIL_PASSWORD=...
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/database
+JWT_SECRET=your-jwt-secret-key
+JWT_EXPIRE=30d
+CLOUDINARY_CLOUD_NAME=your-cloudinary-name
+CLOUDINARY_API_KEY=your-cloudinary-key
+CLOUDINARY_API_SECRET=your-cloudinary-secret
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_SECURE=false
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASSWORD=your-app-password
+EMAIL_FROM_NAME=Your App Name
+EMAIL_FROM=your-email@gmail.com
+```
+
+### Frontend:
+```
+VITE_API_URL=https://your-backend-url.vercel.app
 ```
 
 ## tests

@@ -133,6 +133,13 @@ export const protect = async (
       return;
     }
 
+    if (!process.env.JWT_SECRET) {
+      res.status(500).json({
+        success: false,
+        message: 'Server configuration error',
+      });
+      return;
+    }
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
     
