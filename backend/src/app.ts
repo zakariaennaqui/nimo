@@ -1,23 +1,21 @@
-import express, { Express, Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/connectDb';
 import path from 'path';
-// // Import routes
 import authRoutes from './routes/authRoutes';
-// Load environment variables
-import 'dotenv/config'
 import carRoutes from './routes/carRoutes';
 
+// Load environment variables
+dotenv.config();
 
 // Initialize express app
-const app: Express = express();
+const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 // Serve static files from the uploads directory
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
@@ -33,14 +31,17 @@ connectDB(MONGO_DB_URI);
 app.use('/api/auth', authRoutes);
 app.use('/api/cars', carRoutes);
 
-
-
 // Basic route
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req, res) => {
   res.send('Car Rental API is running!');
 });
 
-// Start server
+// Health check route
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'Server is healthy' });
+});
+
+// Start server (only in development)
 const PORT = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV !== 'production') {
@@ -49,5 +50,4 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-// Export for Vercel
 export default app;
